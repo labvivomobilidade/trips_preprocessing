@@ -50,6 +50,9 @@ pip install git+https://github.com/labvivomobilidade/trips_preprocessing
     - Change input of argument `start_center` and `end_center` in `extract_trips` in `[lon, lat]` to `[lat, lon]`.
     - Preparing to make the library installable. 
 
+- **0.0.3**
+    - Change name of function. 
+
 - **1.0.0**
     - First usable and downloadble version.
 

@@ -168,7 +168,7 @@ for i, trip in enumerate(trips):
 
 ```python
 import pandas as pd
-from trips_preprocessing import extract_trips
+from trips_preprocessing import extract_trips, cluster_routes
 
 df = pd.read_csv("trajectory.csv")  # must contain 'latitude' and 'longitude'
 

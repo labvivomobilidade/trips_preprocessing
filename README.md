@@ -177,9 +177,9 @@ end   = (12.34999, -45.68123)  # [lat, lon]
 
 trips = extract_trips(df, start, end, radius=60)
 
-groups, representants = cluster_routes(trips, cpus = 1)
+groups, representants = cluster_routes(trips, cpus=1)
 
 for group in groups.keys():
-    print(f"Group({group}): {groups[group]} <- index of trip in trips")
+    print(f"Group({group}): {groups[group]} <- index of trip in 'trips'")
 
 ```

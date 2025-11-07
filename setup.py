@@ -21,7 +21,7 @@ setup(
     long_description_content_type="text/markdown",
     long_description=long_description,
     packages=find_packages(),
-    install_requires=["pandas", "numpy", "numba"],
+    install_requires=["pandas", "numpy", "numba", "scipy"],
     keywords=["python", "regression"],
     classifiers=[
         "Development Status :: 1 - Planning",

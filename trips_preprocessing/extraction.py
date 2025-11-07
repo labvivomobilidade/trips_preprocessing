@@ -207,9 +207,9 @@ def extract_trips(trajectory:pd.DataFrame, start_center:tuple[float], end_center
     Extract trip segments from a trajectory based on geofence leave/enter logic.
 
     Args:
-        trajectory (pd.DataFrame): DataFrame containing 'longitude' and 'latitude' columns.
-        start_center (tuple[float, float]): Start geofence centers as [lon, lat].
-        end_center (tuple[float, float]): End geofence centers as [lon, lat].
+        trajectory (pd.DataFrame): DataFrame containing 'latitude' and 'longitude' columns.
+        start_center (tuple[float, float]): Start geofence centers as [lat, lon].
+        end_center (tuple[float, float]): End geofence centers as [lat, lon].
         radius (float): Half-side of the square geofence, in meters. Default is 50. Nn the code a conversion is made to degs.
         consider_n_points (int): Consider starting n seconds before and ending n seconds after.
     Returns:
@@ -219,7 +219,7 @@ def extract_trips(trajectory:pd.DataFrame, start_center:tuple[float], end_center
     latitude, longitude = "latitude", "longitude"
     
     all_trajectory = trajectory.copy()
-    trajectory = trajectory[[longitude, latitude]]
+    trajectory = trajectory[[latitude, longitude]]
     traj = _as_np2(trajectory)
     starts_np = np.asarray([[start_center[0], start_center[1]]], dtype=np.float64)
     ends_np   = np.asarray([[end_center[0],  end_center[1]]],  dtype=np.float64)

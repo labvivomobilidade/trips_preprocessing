@@ -321,7 +321,7 @@ else:
     _find_operations_nb = None  # sem numba disponível
 
 
-def extract_operations_movel_mean(
+def extract_trips_movel_mean(
     df_raw: pd.DataFrame,
     *,
     margin_deg:float = 0.0003,

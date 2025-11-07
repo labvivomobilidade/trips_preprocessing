@@ -1,1 +1,1 @@
-from .extraction import extract_trips, extract_operations_movel_mean
+from .extraction import extract_trips, extract_trips_movel_mean

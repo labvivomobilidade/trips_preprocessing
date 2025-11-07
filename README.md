@@ -61,6 +61,8 @@ pip install git+https://github.com/labvivomobilidade/trips_preprocessing
 
 ## Example
 
+### extract_trips
+
 ```python
 import pandas as pd
 from trips_preprocessing import extract_trips
@@ -76,3 +78,16 @@ for i, trip in enumerate(trips):
     print(f"Trip {i}: {len(trip)} points")
 ```
 
+### extract_trips_movel_mean
+
+```python
+import pandas as pd
+from trips_preprocessing import extract_trips_movel_mean
+
+df = pd.read_csv("trajectory.csv")  # must contain 'latitude' and 'longitude'
+
+trips = extract_trips(df)
+
+for i, trip in enumerate(trips):
+    print(f"Trip {i}: {len(trip)} points")
+```

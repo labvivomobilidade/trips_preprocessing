@@ -78,11 +78,11 @@ for i, trip in enumerate(trips):
     print(f"Trip {i}: {len(trip)} points")
 ```
 
-### extract_trips_movel_mean
+### extract_trips_moving_average
 
 ```python
 import pandas as pd
-from trips_preprocessing import extract_trips_movel_mean
+from trips_preprocessing import extract_trips_moving_average
 
 df = pd.read_csv("trajectory.csv")  # must contain 'latitude' and 'longitude'
 

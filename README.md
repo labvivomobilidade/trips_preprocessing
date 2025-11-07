@@ -57,6 +57,8 @@ pip install git+https://github.com/labvivomobilidade/trips_preprocessing
 
 ## Functions
 
+### extract_trips
+
 []
 
 ## Example
@@ -84,9 +86,9 @@ for i, trip in enumerate(trips):
 import pandas as pd
 from trips_preprocessing import extract_trips_moving_average
 
-df = pd.read_csv("trajectory.csv")  # must contain 'latitude' and 'longitude'
+df = pd.read_csv("trajectory.csv")  # must contain 'latitude', 'longitude' and 'timestamp'
 
-trips = extract_trips(df)
+trips = extract_trips_moving_average(df)
 
 for i, trip in enumerate(trips):
     print(f"Trip {i}: {len(trip)} points")

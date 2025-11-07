@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION="0.0.2"
+VERSION="0.0.3"
 DATA=$(date +"%d-%m-%Y - %H:%M")
 
 read -p "Description: " DESCRIPTION

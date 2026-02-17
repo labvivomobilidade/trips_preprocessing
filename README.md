@@ -55,6 +55,9 @@ pip install git+https://github.com/labvivomobilidade/trips_preprocessing
 
 - **1.0.0**
     - First usable and downloadble version.
+    
+- **1.0.1**
+    - Fixed a compatibility bug between NumPy and pandas datetime.
 
 # Use
 

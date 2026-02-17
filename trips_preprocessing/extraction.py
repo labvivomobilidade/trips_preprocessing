@@ -36,7 +36,7 @@ def _as_np2(a: List[List[float]]) -> np.ndarray:
 #    Numba-accelerated version
 # ---------------------------------------------------------------------
 if HAVE_NUMBA:
-    @njit(cache=True, fastmath=True)
+    @njit(cache=False, fastmath=True)
     def _segment_trips_leave_enter_core(
         traj: np.ndarray,             # shape (N, 2): [lon, lat]
         start_centers: np.ndarray,    # shape (K, 2): [lon, lat]
@@ -281,7 +281,7 @@ def _find_operations_py(dt: np.ndarray, dist_deg: np.ndarray,
     return np.asarray(starts, dtype=np.int64), np.asarray(ends, dtype=np.int64)
 
 if njit is not None:
-    @njit(cache=True, fastmath=True)
+    @njit(cache=False, fastmath=True)
     def _find_operations_nb(dt, dist_deg, margin_deg, window_seconds):
         N = dt.shape[0]
         starts = np.empty(N, np.int64)
@@ -395,8 +395,9 @@ def extract_trips_moving_average(
     dlon[mm_nan] = 0.0
     dist_deg = np.hypot(dlat, dlon)
 
-    t_ns = df[time_col].astype("int64").to_numpy()   # ns
-    t_sec = t_ns * 1e-9
+    # t_ns = df[time_col].astype("int64").to_numpy()   # ns
+    # t_sec = t_ns * 1e-9
+    t_sec = df[time_col].values.astype("datetime64[s]").astype("int64")
 
     dt = np.empty_like(t_sec, dtype="float64")
     dt[0] = 0.0

@@ -71,8 +71,8 @@ Extract trip segments using **geofence leave/enter** logic.
 - `trajectory` (pd.DataFrame): Must contain at least `latitude` and `longitude`. Other columns are preserved.
 - `start_center` (tuple[float, float]): Center of the **start** geofence, given as `(lat, lon)`.
 - `end_center` (tuple[float, float]): Center of the **end** geofence, given as `(lat, lon)`.
-- `lat_col` (str): Name of the **latitude column**. Default: "latitude".
-- `lon_col` (str): Name of the **longitude column**. Default: "longitude".
+- `lat_col` (str,  default="latitude"): Name of the **latitude column**.
+- `lon_col` (str,  default="longitude"): Name of the **longitude column**.
 - `radius` (float, default=50): Half-side of the square geofence in **meters** (converted internally to degrees).
 - `consider_n_points` (int, default=0): Extends each trip segment backward and forward by N samples.
 

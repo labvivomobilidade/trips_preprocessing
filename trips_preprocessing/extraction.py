@@ -201,25 +201,31 @@ else:
 # 2) High-level function
 # ---------------------------------------------------------------------
 
-def extract_trips(trajectory:pd.DataFrame, start_center:tuple[float], end_center:tuple[float],
-                  radius:float = 50, consider_n_points:int = 0) -> list[pd.DataFrame]:
+def extract_trips(trajectory:pd.DataFrame,
+                  start_center:tuple[float],
+                  end_center:tuple[float],
+                  lat_col:str = "latitude",
+                  lon_col:str = "longitude",
+                  radius:float = 50,
+                  consider_n_points:int = 0) -> list[pd.DataFrame]:
     """
     Extract trip segments from a trajectory based on geofence leave/enter logic.
 
     Args:
-        trajectory (pd.DataFrame): DataFrame containing 'latitude' and 'longitude' columns.
+        trajectory (pd.DataFrame): DataFrame containing lat_col and lon_col columns.
         start_center (tuple[float, float]): Start geofence centers as [lat, lon].
         end_center (tuple[float, float]): End geofence centers as [lat, lon].
+        lat_col (str): Name of the latitude column. Default: "latitude".
+        lon_col (str): Name of the longitude column. Default: "longitude".
         radius (float): Half-side of the square geofence, in meters. Default is 50. Nn the code a conversion is made to degs.
         consider_n_points (int): Consider starting n seconds before and ending n seconds after.
     Returns:
         list[pd.DataFrame]: List of DataFrames, each representing one trip segment.
     """
     margin_deg:float = radius/111_132.95 # Convertion to radius to meters more in (https://www.fws.gov/r7/nwr/Realty/data/LandMappers/Public/Help/HTML/R7-Public-Land-Mapper-Help.html?Degreesandgrounddistance.html)
-    latitude, longitude = "latitude", "longitude"
-    
+
     all_trajectory = trajectory.copy()
-    trajectory = trajectory[[latitude, longitude]]
+    trajectory = trajectory[[lat_col, lon_col]]
     traj = _as_np2(trajectory)
     starts_np = np.asarray([[start_center[0], start_center[1]]], dtype=np.float64)
     ends_np   = np.asarray([[end_center[0],  end_center[1]]],  dtype=np.float64)
@@ -321,21 +327,19 @@ else:
     _find_operations_nb = None  # sem numba disponível
 
 
-def extract_trips_moving_average(
-    df_raw: pd.DataFrame,
-    *,
-    margin_deg:float = 0.0003,
-    window_seconds:int = 45,
-    wait_window:int = 90,
-    merge_if_samples_leq:int = 90,
-    min_len_samples:int = 180,
-    max_len_samples:int = 6_000,
-    var_threshold:float = 9e-06,
-    time_col:str = "timestamp",
-    lat_col:str = "latitude",
-    lon_col:str = "longitude",
-    use_numba:bool = True,
-) -> List[pd.DataFrame]:
+def extract_trips_moving_average(df_raw: pd.DataFrame,
+                                 *,
+                                 margin_deg:float = 0.0003,
+                                 window_seconds:int = 45,
+                                 wait_window:int = 90,
+                                 merge_if_samples_leq:int = 90,
+                                 min_len_samples:int = 180,
+                                 max_len_samples:int = 6_000,
+                                 var_threshold:float = 9e-06,
+                                 time_col:str = "timestamp",
+                                 lat_col:str = "latitude",
+                                 lon_col:str = "longitude",
+                                 use_numba:bool = True,) -> List[pd.DataFrame]:
     """
     Extract operation windows from a lat/lon time series using a moving-average band
     and stay-time rules (outside/inside) to open/close segments.
